@@ -104,6 +104,38 @@ export function useActivityDetails(id) {
     toast.current.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
   };
 
+  async function NotifyDoctor() {
+    const lastCreatedActivity = user.activities.length > 0 ? user.activities.reduce((prev, current) => {
+      return new Date(current.createdAt) > new Date(prev.createdAt) ? current : prev;
+    }) : null;
+
+    let userStatus = ''
+    let BadgeColor = ''
+    const currentDate = new Date();
+    const lastActivityDate = lastCreatedActivity ? new Date(lastCreatedActivity.createdAt) : null;
+
+    const currentHour = currentDate.getHours()
+    const lastHour = lastActivityDate ? lastActivityDate.getHours() : null;
+
+    if (!lastHour && currentHour) {
+      userStatus = `did for the first time @${currentHour} o'clock`
+      BadgeColor = 'info'
+    }
+    else if (currentHour === lastHour) {
+      userStatus = `did on Time @ ${currentHour} o'clock`
+      BadgeColor = 'success'
+    }
+    else if (lastHour && lastHour !== currentHour) {
+      userStatus = `not on Time, hour changed to be @ ${currentHour} o'clock`
+      BadgeColor = 'warn'
+    }
+
+    //message to Doctor Dashboard
+    if (userStatus && BadgeColor) {
+      const Pres = await produce({ logType: 'UL', message: { userId: user._id, status: 'InProgress', userStatus, BadgeColor } })
+      console.log("Doctor Alert", Pres);
+    }
+  }
 
   const handleApplyToActivity = async () => {
     setTimeLineVisablity(true);
@@ -117,6 +149,9 @@ export function useActivityDetails(id) {
     console.log(res);
     const Pres = await produce({ logType: 'UP', message: { userId: user._id, status: 'InProgress' } })
     console.log("produceStatus", Pres);
+
+    //Check if on time or not and send notification to DashBoard
+    NotifyDoctor()
   }
   return {
     responsiveOptions,

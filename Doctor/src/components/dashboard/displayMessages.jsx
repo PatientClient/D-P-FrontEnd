@@ -1,49 +1,43 @@
-import { Toast } from 'primereact/toast';
 import { useEffect, useRef, useState } from 'react';
-import Stomp from 'stompjs';
+import { Button } from 'primereact/button';
 import { Messages } from 'primereact/messages';
+import Stomp from 'stompjs';
+import useApiRequest from '../../hooks/useApiRequest';
 
 
 export function Message() {
-  const msgs = useRef(null);
-  const toast = useRef(null);
-  const [messages, setMessage] = useState([])
+  const msgs = useRef(null)
+  const { request } = useApiRequest()
   const [connected, setConnected] = useState(false)
-  const queueName = 'userProgress';
+  const queueName = 'AlertQueue';
   const stompClient = Stomp.client('ws://localhost:15674/ws');
 
   useEffect(() => {
     stompClient.connect('guest', 'guest', () => {
       setConnected(true);
       stompClient.subscribe(`/queue/${queueName}`, message => {
-        let color = 'info'
-        const body = JSON.parse(message.body);
-        if (body.message === 'progress') {
-          color = 'warn';
-        }
-        toast.current?.show({ severity: 'success', label: "Error", summary: 'success', detail: `new Message `, life: 3000 });
-        msgs.current?.show(
-          { sticky: true, severity: color.toString(), summary: 'Info', detail: 'Message Content', closable: false }
-        );
-        setMessage(prevMessages => [...prevMessages, body]);
-      })
-
-    });
+        const body = message.body;
+        const res = JSON.parse(body)
+        console.log(res);
+        handleMsgs(res.message)
+      });
+    },)
   }, [])
 
+
+  async function handleMsgs(body) {
+    console.log("body", body);
+    const user = await request(`/user/${body.userId}`)
+    msgs.current?.show(
+      { sticky: true, severity: body.BadgeColor, summary: 'Info', detail: `${user.fullName} ${body.userStatus}`, closable: true }
+    );
+  }
   return (
-    <div>
-      <h1>connected:{" " + connected}</h1>
-      <Toast ref={toast} />
+    <div style={{ width: '90%' }}>
+      <h4>messages Component</h4>
+      <h4>connected: {"" + connected}</h4>
+      {/* <Button onClick={handleClick} label={"click"} /> */}
       <Messages ref={msgs} />
-      <h1> real time messages</h1>
-      <div>
-        {
-          messages.length > 0 && messages.map((message, i) =>
-            <h1 key={i}>{message.message}</h1>
-          )
-        }
-      </div>
     </div>
   );
 }
