@@ -9,7 +9,7 @@ export function DashBoard() {
   }
   return (
     <>
-      <Message />
+      {/* <Message /> */}
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div style={{ width: '100vw' }}>
           <Users title={"not active users"} setData={setUsers} users={filterData("NotActive")} />

@@ -87,7 +87,15 @@ export function useActivityDetails(id) {
     refreshActivity()
     userRequest()
     toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
-    const Pres = await produce({ logType: 'UP', message: { userId: user._id, status: 'Active' } })
+    const Pres = await produce(
+      {
+        logType: 'UP',
+        message: {
+          userId: user._id,
+          status: 'Active'
+        }
+      }
+    )
     console.log("produceStatus", Pres);
 
   };
