@@ -1,10 +1,9 @@
 export const API_URL = 'http://localhost:5003/api'
 export const JWTSECRET = "bTQ2eEpJkFvR8sWp"
-export  const statuses = [
+export const statuses = [
   "NotActive", "InProgress", "Active"
 ];
-export const videos = [
-  {
+export const videos = [{
     id: 1,
     title: "Introduction to React",
     description: "Learn the basics of React and create your first app",
@@ -26,3 +25,5 @@ export const videos = [
     thumbnailUrl: "https://example.com/thumbnail3.jpg"
   }
 ];
+
+export const PRODUCE_URL = 'http://localhost:5003/api/producer/sendLog'

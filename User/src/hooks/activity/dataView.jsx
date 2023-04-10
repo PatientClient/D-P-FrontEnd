@@ -91,7 +91,6 @@ export function useActivityView() {
         <div></div>
         <div className='text-2xl font-bold'>list of activities</div>
         <div className='pr-2  '>
-          <Button icon="pi pi-plus" onClick={() => navigate("/activity/add")} severity='warning' className="p-button-rounded"></Button>
 
         </div>
       </div>

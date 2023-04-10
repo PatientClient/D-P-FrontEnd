@@ -7,6 +7,7 @@ import { AddActivity } from "./components/activity/add/AddActivity";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { createBrowserRouter } from "react-router-dom";
 import { ActivityDetails } from "./components/activity/details/ActivityDetails";
+import { DashBoard } from "./pages/dashboard/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ export const router = createBrowserRouter([
     ,
     children: [
       { path: '', element: <UsersList /> },
+      { path: 'dashboard', element: <DashBoard /> },
       { path: 'user', element: <UsersList /> },
       { path: 'user/add', element: <AddUser /> },
       { path: 'activity', element: <ActivitiesPage /> },

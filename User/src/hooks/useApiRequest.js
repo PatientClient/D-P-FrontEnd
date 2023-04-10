@@ -13,7 +13,7 @@ const useApiRequest = () => {
 
 
 
-  const request = async (url, method = 'GET', body = null) => {
+  const request = async (url, method = 'GET', body = null, customUrl = false) => {
 
     try {
       setLoading(true);
@@ -29,7 +29,7 @@ const useApiRequest = () => {
         body: body ? JSON.stringify(body) : null,
       };
 
-      const response = await fetch(API_URL + url, options);
+      const response = await fetch(customUrl ? url : API_URL + url, options);
       const responseData = await response.json();
       console.log(responseData);
       if (responseData.error) {

@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import useApi from "../useApi";
 import useApiRequest from "../useApiRequest";
 import ReactPlayer from "react-player";
+import { PRODUCE_URL } from "../../globalData";
+import useProduceApi from "../producerApi";
 
 
 export function useActivityDetails(id) {
@@ -11,7 +13,7 @@ export function useActivityDetails(id) {
   const [timeLineVisablity, setTimeLineVisablity] = useState(false)
   const toast = useRef(null)
   const [unknownUser, setUnknownUser] = useState(false)
-
+  const { produce } = useProduceApi()
   useEffect(() => {
     if (!user) {
       setUnknownUser(true)
@@ -85,6 +87,9 @@ export function useActivityDetails(id) {
     refreshActivity()
     userRequest()
     toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+    const Pres = await produce({ logType: 'UP', message: { userId: user._id, status: 'Active' } })
+    console.log("produceStatus", Pres);
+
   };
 
   const rejectHandle = () => {
@@ -99,9 +104,11 @@ export function useActivityDetails(id) {
       toast.current.show({ severity: 'err', summary: 'error', detail: 'activity rejected ', life: 3000 });
       return
     }
-    userRequest()
+    await userRequest()
     toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'activity applied ', life: 3000 });
     console.log(res);
+    const Pres = await produce({ logType: 'UP', message: { userId: user._id, status: 'InProgress' } })
+    console.log("produceStatus", Pres);
   }
   return {
     responsiveOptions,
