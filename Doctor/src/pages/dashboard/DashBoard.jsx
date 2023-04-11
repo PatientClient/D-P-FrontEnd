@@ -19,12 +19,12 @@ export function DashBoard() {
         <div style={{ width: '100vw' }}>
           <Users title={" active users"} setData={setUsers} users={filterData("Active")} />
         </div>
+      </div>
         <div style={{ width: '100vw' }}>
           <h1>messages</h1>
           <Message />
 
         </div>
-      </div>
 
     </>
   )
