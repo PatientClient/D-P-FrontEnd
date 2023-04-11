@@ -11,7 +11,7 @@ import { InputText } from 'primereact/inputtext';
 import { statuses } from '../../../globalData';
 
 export const UsersList = () => {
-  const { toast, customers, setData: setCustomer, header2, globalFilter2, selectedCustomer2, DeleteBodyTemplate, setSelectedCustomer2, NameBodyTemplate, cityBodyTemplate, DoctorBodyTemplate, statusBodyTemplate, statusFilter } = useUsersDataView()
+  const { toast, customers, setData: setCustomer, header2, globalFilter2, selectedCustomer2, profileBodyTemplate, DeleteBodyTemplate, setSelectedCustomer2, NameBodyTemplate, cityBodyTemplate, DoctorBodyTemplate, statusBodyTemplate, statusFilter } = useUsersDataView()
   const [editRow, setEditRow] = useState({
     fullName: '',
     address: '',
@@ -67,6 +67,7 @@ export const UsersList = () => {
         <Column field="doctor.name" header="Doctor Name" body={DoctorBodyTemplate} sortable sortField="doctor.name" filter filterField="doctor.name" filterMatchMode="contains" filterPlaceholder="Search by name"></Column>
         <Column field="status" header="Status" body={statusBodyTemplate} sortable filter filterMatchMode="equals" editor={(props) => statusEditor(props.rowData._id, props)} filterElement={statusFilter}></Column>
         <Column header="Delete" body={DeleteBodyTemplate}></Column>
+        <Column header="profile" body={profileBodyTemplate}></Column>
         <Column rowEditor headerStyle={{ width: '7rem' }} bodyStyle={{ textAlign: 'center' }}></Column>
 
       </DataTable>

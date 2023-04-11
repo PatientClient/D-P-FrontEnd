@@ -13,6 +13,7 @@ import { Dropdown } from 'primereact/dropdown';
 import useApiRequest from "../useApiRequest";
 import { Button } from 'primereact/button';
 import { statuses } from "../../globalData";
+import { useNavigate } from "react-router";
 export function useUsersDataView() {
   const { request: requsestCusomer, data: customers, setData } = useApi("/user")
   const { request } = useApiRequest("/user")
@@ -20,6 +21,7 @@ export function useUsersDataView() {
   const [globalFilter2, setGlobalFilter2] = useState(null);
   const [globalFilter3, setGlobalFilter3] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState(null);
+  const navigate = useNavigate();
   const toast = useRef(null);
 
   const dataTableFuncMap = {
@@ -49,8 +51,13 @@ export function useUsersDataView() {
     return (
       <React.Fragment>
         <Button icon='pi pi-trash' onClick={() => { deleteRecored(rowData._id) }} className="p-button-rounded p-button-danger " />
-
-
+      </React.Fragment>
+    );
+  }
+  const profileBodyTemplate = (rowData) => {
+    return (
+      <React.Fragment>
+        <Button icon='pi pi-user' onClick={() => { navigate(`/user/profile/${rowData._id}`) }} className="p-button-rounded p-button-info " />
       </React.Fragment>
     );
   }
@@ -131,7 +138,8 @@ export function useUsersDataView() {
     customers,
     DeleteBodyTemplate,
     toast,
-    setData
+    setData,
+    profileBodyTemplate
   }
 
 }

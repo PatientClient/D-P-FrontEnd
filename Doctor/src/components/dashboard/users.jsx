@@ -26,6 +26,6 @@ export function Users({ users, setData, title }) {
 
   return (
     <div className="card xl:flex xl:justify-content-center">
-      <OrderList value={users} onChange={(e) => setData(e.value)} itemTemplate={itemTemplate} header={title} filter filterBy="fullName"></OrderList>    </div>
+      <OrderList value={users} onChange={(e) => setData(e.value)} itemTemplate={itemTemplate} header={title} filter filterBy="fullName" ></OrderList>    </div>
   )
 }

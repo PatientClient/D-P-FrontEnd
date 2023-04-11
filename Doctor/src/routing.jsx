@@ -8,6 +8,7 @@ import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { createBrowserRouter } from "react-router-dom";
 import { ActivityDetails } from "./components/activity/details/ActivityDetails";
 import { DashBoard } from "./pages/dashboard/Dashboard";
+import { UserProfile } from "./pages/userProfile/UserProfile";
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
       { path: 'dashboard', element: <DashBoard /> },
       { path: 'user', element: <UsersList /> },
       { path: 'user/add', element: <AddUser /> },
+      { path: 'user/Profile/:id', element: <UserProfile /> },
       { path: 'activity', element: <ActivitiesPage /> },
       { path: 'activity/details/:id', element: <ActivityDetails /> },
       { path: 'activity/add', element: <AddActivity /> },
