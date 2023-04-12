@@ -19,6 +19,13 @@ export function NavBar() {
       ]
     },
     {
+      label: 'tasks',
+      icon: 'pi pi-calendar',
+      command: () => {
+        navigate('/tasks')
+      }
+    },
+    {
       label: 'Quit',
       icon: 'pi pi-fw pi-power-off'
     }
