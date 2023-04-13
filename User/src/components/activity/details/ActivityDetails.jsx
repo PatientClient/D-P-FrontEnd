@@ -19,7 +19,8 @@ export const ActivityDetails = () => {
     rejectHandle,
     acceptHandle,
     handleApplyToActivity,
-    refreshActivity
+    refreshActivity,
+    hideComplete
   } = useActivityDetails(id)
   if (!user) {
     return <h1>usre not logged in</h1>
@@ -46,7 +47,7 @@ export const ActivityDetails = () => {
         </div>
       }
       <div>
-        <TimeLine progress={timeLineVisablity.activityStatus || "NotActive"} />
+        <TimeLine progress={timeLineVisablity.activityStatus || user.status} />
       </div>
       {activity.photos.length > 0 && <div>
         <h1>Add image related to this activity</h1>
@@ -73,7 +74,7 @@ export const ActivityDetails = () => {
             <AddFeedback activity={activity} userId={user._id} activityId={activity._id} onAdd={refreshActivity} />
 
             {activity.feedback.map((fb) =>
-              < Comment key={fb._id}rate={fb.rate} description={fb.description} name={fb.createdBy.fullName || 'name'} />
+              < Comment key={fb._id} rate={fb.rate} description={fb.description} name={fb.createdBy.fullName || 'name'} />
             )}
           </>
 

@@ -14,7 +14,8 @@ import useApi from "../../hooks/useApi";
 
 export function MangeTasks({ userId, doctorId }) {
   console.log('ssad', userId, doctorId);
-  const { data: tasks, request: restTasks } = useApi('/task')
+  if (!userId, !doctorId) return <h1>login...</h1>
+  const { data: tasks, request: restTasks } = useApi(`/task/${userId}/userTasks`)
 
   return <>
     <div>

@@ -66,13 +66,14 @@ export const useAddUserForm = () => {
       } catch (error) {
         throw new Error(error)
       }
-
+      
     } else {
       // show error message
       toast.current.show({ severity: 'error', summary: 'Error', detail: 'Please fill all required fields!', life: 3000 });
       console.log(formData);
     }
   };
+
 
   const validateForm = () => {
     return (
