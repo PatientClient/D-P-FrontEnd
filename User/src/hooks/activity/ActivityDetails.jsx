@@ -14,6 +14,7 @@ export function useActivityDetails(id) {
   const toast = useRef(null)
   const [unknownUser, setUnknownUser] = useState(false)
   const { produce } = useProduceApi()
+  const [hideComplete, setHideComplete] = useState(false)
   useEffect(() => {
     if (!user) {
       setUnknownUser(true)
@@ -29,8 +30,11 @@ export function useActivityDetails(id) {
       if (res) {
         setTimeLineVisablity(res)
       }
+      else {
+        notActiveStatus()
+      }
     }
-  }, [user, activity])
+  }, [])
 
 
   //checks if the user is created activity in the same day if he did it will return activity
@@ -84,19 +88,20 @@ export function useActivityDetails(id) {
     if (res.error) {
       toast.current.show({ severity: 'error', summary: 'rejected', detail: `${error.message}`, life: 3000 });
     }
-    refreshActivity()
-    userRequest()
-    toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
-    const Pres = await produce(
-      {
-        logType: 'UP',
-        message: {
-          userId: user._id,
-          status: 'Active'
-        }
-      }
-    )
-    console.log("produceStatus", Pres);
+    await refreshActivity()
+    await userRequest()
+    setHideComplete(true);
+    // toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+    // const Pres = await produce(
+    //   {
+    //     logType: 'UP',
+    //     message: {
+    //       userId: user._id,
+    //       status: 'Active'
+    //     }
+    //   }
+    // )
+    // console.log("produceStatus", Pres);
 
   };
 
@@ -153,6 +158,11 @@ export function useActivityDetails(id) {
     //Check if on time or not and send notification to DashBoard
     NotifyDoctor()
   }
+
+  const notActiveStatus = () => {
+    const res = request(`/user/${user._id}`, 'PATCH', { status: 'NotActive' })
+    userRequest();
+  }
   return {
     responsiveOptions,
     itemTemplate,
@@ -167,6 +177,7 @@ export function useActivityDetails(id) {
     acceptHandle,
     unknownUser,
     handleApplyToActivity,
-    refreshActivity
+    refreshActivity,
+    hideComplete
   }
 }

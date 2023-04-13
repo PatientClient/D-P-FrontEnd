@@ -5,7 +5,6 @@ import { Toast } from 'primereact/toast';
 
 export default function ActivityList() {
   const { activities, getSeverity, itemTemplate, header, toast } = useActivityView()
-
   return (
     <div className="card">
       <DataView value={activities} itemTemplate={itemTemplate} layout='grid' header={header()} />

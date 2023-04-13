@@ -1,5 +1,6 @@
 import { Message } from "../../components/dashboard/displayMessages";
 import { Users } from "../../components/dashboard/users";
+import { DisplayKnbos } from "../../components/knob/DisplayKnobs";
 import { useDashBoard } from "../../hooks/dashboard/useDashBoard";
 
 export function DashBoard() {
@@ -9,6 +10,9 @@ export function DashBoard() {
   }
   return (
     <>
+      <div>
+        <DisplayKnbos users={users}  />
+      </div>
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div style={{ width: '100vw' }}>
           <Users title={"not active users"} setData={setUsers} users={filterData("NotActive")} />
@@ -20,11 +24,11 @@ export function DashBoard() {
           <Users title={" active users"} setData={setUsers} users={filterData("Active")} />
         </div>
       </div>
-        <div style={{ width: '100vw' }}>
-          <h1>messages</h1>
-          <Message />
+      <div style={{ width: '100vw' }}>
+        <h1>messages</h1>
+        <Message />
 
-        </div>
+      </div>
 
     </>
   )

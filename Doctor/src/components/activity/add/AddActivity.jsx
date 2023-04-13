@@ -8,19 +8,18 @@ import useApi from '../../../hooks/useApi';
 import useApiRequest from '../../../hooks/useApiRequest';
 
 export const AddActivity = () => {
+  const toast = useRef(null);
   const { data: doctor } = useApi("/doctor/signedInDoctor", "POST", { token: JSON.parse(localStorage.getItem("token")) });
   const { request } = useApiRequest()
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [duration, setDuration] = useState(0);
-  const toast = useRef(null);
-
+  if (!doctor || doctor.error) {
+    toast.current?.show({ severity: 'warn', summary: 'Error', detail: 'Please sign in as a doctor to add an activity.' });
+    return <h1>login to access this page</h1>;
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!doctor) {
-      toast.current.show({ severity: 'warn', summary: 'Error', detail: 'Please sign in as a doctor to add an activity.', life: 3000 });
-      return;
-    }
     const activity = { name, description, duration, createdBy: doctor?.doctor._id };
     //add to db//
     try {

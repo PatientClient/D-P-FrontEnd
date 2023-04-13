@@ -3,7 +3,7 @@ import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
 import { useNavigate } from 'react-router';
 export function NavBar() {
-const navigate = useNavigate()
+  const navigate = useNavigate()
   const items = [
     {
       label: 'Activities',
@@ -22,21 +22,6 @@ const navigate = useNavigate()
           command: () => {
             navigate('/activity/add')
           }
-        },
-        {
-          label: 'Delete Activity',
-          icon: 'pi pi-fw pi-trash'
-        },
-        {
-          label: 'Edit Activity',
-          icon: 'pi pi-fw pi-trash'
-        },
-        {
-          separator: true
-        },
-        {
-          label: 'Export',
-          icon: 'pi pi-fw pi-external-link'
         }
       ]
     },
@@ -59,49 +44,16 @@ const navigate = useNavigate()
             navigate('/user/add')
           }
 
-        },
-        {
-          label: 'Edit',
-          icon: 'pi pi-fw pi-user-plus',
-
-        },
-        {
-          label: 'Delete',
-          icon: 'pi pi-fw pi-user-minus',
-
         }
 
       ]
     },
     {
-      label: 'Events',
-      icon: 'pi pi-fw pi-calendar',
-      items: [
-        {
-          label: 'Edit',
-          icon: 'pi pi-fw pi-pencil',
-          items: [
-            {
-              label: 'Save',
-              icon: 'pi pi-fw pi-calendar-plus'
-            },
-            {
-              label: 'Delete',
-              icon: 'pi pi-fw pi-calendar-minus'
-            }
-          ]
-        },
-        {
-          label: 'Archieve',
-          icon: 'pi pi-fw pi-calendar-times',
-          items: [
-            {
-              label: 'Remove',
-              icon: 'pi pi-fw pi-calendar-minus'
-            }
-          ]
-        }
-      ]
+      label: 'Dashboard',
+      icon: 'pi pi-database',
+      command: () => {
+        navigate('/dashboard')
+      }
     },
     {
       label: 'Quit',
