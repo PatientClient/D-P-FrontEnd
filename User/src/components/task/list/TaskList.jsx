@@ -12,8 +12,13 @@ import { Ripple } from 'primereact/ripple';
 import { Toast } from 'primereact/toast';
 import useApiRequest from '../../../hooks/useApiRequest';
 import { useRef } from 'react';
+import useApi from '../../../hooks/useApi';
 
-export function TaskList({ tasks, onChange }) {
+export function TaskList({ id }) {
+  if(!id){
+    return <h1>login</h1>
+  }
+  const { data: tasks ,request:onChange} = useApi(`/task/${id}/userTasks`)
   const { request: updateStatus } = useApiRequest()
   if (!tasks) return <h1>no tasks</h1>
   const taskTimeTemplate = rowData => {
