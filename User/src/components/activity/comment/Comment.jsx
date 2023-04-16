@@ -1,8 +1,10 @@
 import { Avatar } from 'primereact/avatar';
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
+import useApi from '../../../hooks/useApi';
 
 export function Comment({ name, description, rate }) {
+  
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '1rem', borderRadius: '10px', backgroundColor: '#f5f5f5' }}>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

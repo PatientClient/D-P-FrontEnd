@@ -14,13 +14,15 @@ export function useActivityDetails(id) {
   const toast = useRef(null)
   const [unknownUser, setUnknownUser] = useState(false)
   const { produce } = useProduceApi()
-  const [hideComplete, setHideComplete] = useState(false)
+  const [Loading, setLoading] = useState(false)
   useEffect(() => {
     if (!user) {
       setUnknownUser(true)
+      setLoading(true)
     }
     else {
       setUnknownUser(false)
+      setLoading(false)
     }
   }, [user])
 
@@ -67,7 +69,7 @@ export function useActivityDetails(id) {
   ];
 
   const itemTemplate = (item) => {
-    return <img src={item.url} alt={item.id} style={{ width: '50vw', height: '50vh' }} />
+    return <img src={item.url} alt={item.id} style={{ width: '30vw' }} />
   }
 
   const thumbnailTemplate = (item) => {
@@ -90,19 +92,6 @@ export function useActivityDetails(id) {
     }
     await refreshActivity()
     await userRequest()
-    setHideComplete(true);
-    // toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
-    // const Pres = await produce(
-    //   {
-    //     logType: 'UP',
-    //     message: {
-    //       userId: user._id,
-    //       status: 'Active'
-    //     }
-    //   }
-    // )
-    // console.log("produceStatus", Pres);
-
   };
 
   const rejectHandle = () => {
@@ -178,6 +167,6 @@ export function useActivityDetails(id) {
     unknownUser,
     handleApplyToActivity,
     refreshActivity,
-    hideComplete
+    Loading
   }
 }

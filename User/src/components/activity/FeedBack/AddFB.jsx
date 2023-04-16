@@ -29,20 +29,21 @@ function AddFeedback({ userId, activityId, activity, onAdd }) {
   };
 
   return (
-    <div className="p-card p-p-2 p-rounded-10">
-      <form onSubmit={handleSubmit}>
-        <div className="p-field p-my-2">
+    <div className="p-card p-p-2 p-rounded-10 flex align-items-center justify-content-center">
+      <form onSubmit={handleSubmit} className="flex  flex-column  gap-4 ">
+        <div className="p-field p-my-2 flex flex-column  align-items-center justify-content-center gap-2 mt-3">
           <label htmlFor="rating">Rating</label>
           <Rating
+          placeholder="rate"
             id="rating"
             value={rating}
             cancel={false}
             onChange={(e) => setRating(e.value)}
           />
         </div>
-        <div className="p-field p-my-2">
-          <label htmlFor="comment">Comment</label>
+        <div className="p-field p-my-2 flex flex-column w-full" >
           <InputTextarea
+          placeholder="comment"
             id="comment"
             value={comment}
             onChange={(e) => setComment(e.target.value)}

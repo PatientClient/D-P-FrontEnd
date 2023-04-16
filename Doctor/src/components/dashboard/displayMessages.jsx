@@ -31,14 +31,14 @@ export function Message() {
     msgs.current?.show(
       { sticky: true, severity: body.BadgeColor, summary: 'Info', detail: `${user.fullName} ${body?.status} ${body?.userStatus} `, closable: true }
     );
-    sfxRef.current.play();
+    sfxRef.current?.play();
   }
   return (
     <div style={{ width: '90%' }}>
       <h4>messages Component</h4>
       <h4>connected: {"" + connected}</h4>
       {/* <Button onClick={handleClick} label={"click"} /> */}
-      <Messages ref={msgs} />
+      <Messages ref={msgs} rev/>
       <audio ref={sfxRef} src={sfxMessage} />
     </div>
   );
