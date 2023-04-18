@@ -65,7 +65,7 @@ export function useActivityView() {
           </div>
           <div className="flex flex-column align-items-center gap-3 py-5">
             <div className="text-2xl font-bold">{activity.name}</div>
-            <img className="w-9 shadow-2 border-round" style={{height:"30vh"}} src={activity?.photos[0]?.url || "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"} alt={activity.name} />
+            <img className="w-9 shadow-2 border-round" style={{ height: "30vh" }} src={activity?.photos[activity?.photos.length - 1]?.url || "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"} alt={activity.name} />
             <Rating value={activity?.rate} readOnly cancel={false}></Rating>
             <div className="text-2xl font-bold">{activity?.description}</div>
           </div>

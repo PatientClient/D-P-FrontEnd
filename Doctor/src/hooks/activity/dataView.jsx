@@ -74,12 +74,12 @@ export function useActivityView() {
           </div>
           <div className="flex flex-column align-items-center gap-3 py-5">
             <div className="text-2xl font-bold">{activity.name}</div>
-            <img className="w-9 shadow-2 border-round" src={activity?.photos[0]?.url || "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"} alt={activity.name} />
+            <img className="w-9 shadow-2 border-round" src={activity?.photos[activity?.photos.length - 1]?.url || "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"} alt={activity.name} />
             <Rating value={activity?.rate} readOnly cancel={false}></Rating>
             <div className="text-2xl font-bold">{activity?.description}</div>
           </div>
           <div className="flex align-items-center justify-content-between">
-            <Button icon="pi pi-sign-in" severity='success' label='join' onClick={() => { navigate(`/activity/details/${activity._id}`) }} className="p-button-rounded"></Button>
+            {/* <Button icon="pi pi-sign-in" severity='success' label='join' onClick={() => { navigate(`/activity/details/${activity._id}`) }} className="p-button-rounded"></Button> */}
             <Button onClick={() => handleDelete(activity._id)} icon="pi pi-trash" severity='danger' label='' className="p-button-rounded"></Button>
             <Button onClick={handleEditClick} icon="pi pi-pencil" severity='warning' label='edit' className="p-button-rounded"></Button>
             <EditActivity activity={activity} visible={editDialogVisible} onHide={handleEditDialogHide} />
