@@ -69,11 +69,11 @@ export function useActivityDetails(id) {
   ];
 
   const itemTemplate = (item) => {
-    return <img src={item.url} alt={item.id} style={{ width: '30vw' }} />
+    return <img src={item.url} alt={item.id} style={{ width: '50vw' }} />
   }
 
   const thumbnailTemplate = (item) => {
-    return <img src={item.url} alt={item.id} style={{ width: '50vw', height: '10vh' }} />
+    return <img src={item.url} alt={item.id} style={{ maxWidth: '50vw' ,height: '10vh' }} />
   }
   const itemTemplateVideo = (item) => {
     return <ReactPlayer url={item.videoUrl} width='50vw' height='50vh' />
